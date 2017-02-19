@@ -1,0 +1,41 @@
+* python
+** 1. Two Sum
+假定每个都只有一个解
+#+BEGIN_SRC python
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[Int]
+        :type target: int
+        :rtype:List[int]
+        """
+        l = [[index,item]  for index,item in enumerate(nums) if item <= target/2 ]
+        r = [[index,item]  for index,item in enumerate(nums) if item >= target/2 ]
+        for i in l:
+            for j in r:
+                if (i[1]+j[1] == target)&(i[0] != j[0]):
+                    return [i[0],j[0]]
+#+END_SRC
+
+官方解答
+#+BEGIN_SRC python
+class Solution(object):
+   def twoSum(self, nums, target):
+       if len(nums) <= 1:
+           return False
+       buff_dict = {}
+       for i in range(len(nums)):
+           if nums[i] in buff_dict:
+               return [buff_dict[nums[i]], i]
+           else:
+               buff_dict[target-nums[i]] = i
+
+
+s = Solution()
+return s.twoSum([3,3],6)
+
+
+#+END_SRC
+
+#+RESULTS:
+| 0 | 1 |
